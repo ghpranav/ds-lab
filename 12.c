@@ -79,7 +79,7 @@ int concat(int len)
     int i, n;
     printf("Enter number of elements: ");
     scanf("%d", &n);
-    for (i = len; i < (n + len); i++)
+    for (i = len + 1; i <= (n + len); i++)
         cur = insert(i);
     cur->next = NULL;
     return (n + len);
@@ -122,7 +122,6 @@ void display()
     printf("\nYour list:\n");
     for (temp = head; temp != NULL; temp = temp->next)
         printf("%d\t", temp->data);
-    free(temp);
     return;
 }
 
@@ -163,7 +162,7 @@ int main()
             break;
 
         case 2:
-            cur = insert(n);
+            cur = insert(n + 1);
             cur->next = NULL;
             n++;
             display();
@@ -172,7 +171,7 @@ int main()
         case 3:
             printf("Enter the position: ");
             scanf("%d", &pos);
-            if (pos <= n)
+            if (pos <= n + 1)
             {
                 cur = insert(pos);
                 n++;
