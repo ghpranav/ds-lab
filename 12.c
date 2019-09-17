@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int flag = 0;
 struct node
 {
     int data;
@@ -28,24 +27,8 @@ struct node *insert(int pos)
 
     if (pos == 1)
     {
-        if (flag == 0)
-        {
-            head = temp;
-            temp->next = NULL;
-            flag = 1;
-            return temp;
-        }
-        else
-        {
-            temp->next = head;
-            head = temp;
-            return temp;
-        }
-    }
-    else if (pos == 2)
-    {
-        temp->next = head->next;
-        head->next = temp;
+        temp->next = head;
+        head = temp;
         return temp;
     }
 
@@ -66,13 +49,6 @@ void delete (int pos)
     {
         head = head->next;
         free(cur);
-        return;
-    }
-    else if (pos == 2)
-    {
-        temp = head->next;
-        head->next = temp->next;
-        free(temp);
         return;
     }
 
@@ -97,15 +73,16 @@ void reverse()
     head = prev;
 }
 
-void concat(int len)
+int concat(int len)
 {
     struct node *cur;
     int i, n;
     printf("Enter number of elements: ");
     scanf("%d", &n);
-    for (i = n; i <= (n + len); i++)
+    for (i = len; i < (n + len); i++)
         cur = insert(i);
     cur->next = NULL;
+    return (n + len);
 }
 
 void search_key()
@@ -223,9 +200,10 @@ int main()
             break;
 
         case 6:
-            concat(n);
+            n = concat(n);
             display();
             break;
+
         case 7:
             search_key();
             break;
