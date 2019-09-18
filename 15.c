@@ -100,6 +100,10 @@ int main() {
 
     printf("Enter number of elements: ");
     scanf("%d", &n);
+    if(n == 0) {
+		printf("Empty list!");
+		exit(0);
+	}
     for (i = 1; i <= n; i++)
         cur = insert(i);
     cur->next = head;
