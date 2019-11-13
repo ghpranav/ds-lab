@@ -4,7 +4,7 @@
 #include<stdlib.h>
 
 typedef struct node {
-	int size, front, rear;
+	int front, rear;
 	int *arr;
 	unsigned max;
 } Queue;
@@ -16,7 +16,6 @@ Queue* init(int len) {
 		return 0;
 	
 	temp->max = len;
-	temp->size = 0;
 	temp->front = temp->rear = -1;
 	
 	temp->arr = (int*)malloc(len*sizeof(int));
@@ -27,13 +26,13 @@ Queue* init(int len) {
 }
 
 int isFull(Queue *q) {
-	if(q->size == q->max)
+	if(q->rear == q->max - 1)
 		return 1;
 	return 0;
 }
 
 int isEmpty(Queue *q) {
-	if(q->size == 0)
+	if(q->front == -1)
 		return 1;
 	return 0;
 }
@@ -47,7 +46,6 @@ void enqueue(Queue *q, int x) {
 	if(isEmpty(q))
 		q->front++;
 	
-	q->size++;
 	q->rear++;
 	q->arr[q->rear] = x;
 }
@@ -65,7 +63,6 @@ int dequeue(Queue *q) {
 	}
 	else q->front++;
 	
-	q->size--;
 	return(temp);
 }
 
